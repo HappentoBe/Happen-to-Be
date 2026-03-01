@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Happen to Be</title>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+        --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+        --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+      nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+      .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+      .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+      .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+      .btn { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2.5rem; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; border-radius: 50px; }
+      .btn-primary { background: var(--orange); color: var(--black); }
+      .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); }
+      .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+      .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+      .section-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.8rem; }
+      .section-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 3rem; }
+      .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent); }
+      .page-hero { padding: 10rem 6vw 5rem; background: var(--black); position: relative; overflow: hidden; }
+      .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+      .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; }
+      .page-hero-title span { color: var(--orange); }
+      .page-content { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+      footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+      .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+      .footer-links { display: flex; gap: 2rem; }
+      .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--orange); }
+      .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+      .live-tag { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; background: var(--orange); color: var(--black); border-radius: 50px; display: inline-block; margin-top: 0.5rem; }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .page-hero { padding: 8rem 1.5rem 3rem; } .page-content { padding: 3rem 1.5rem; } footer { flex-direction: column; text-align: center; } }
+    </style>
+    <style>
+      .gallery-section { margin-bottom: 5rem; }
+      .gallery-section-title { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--orange); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,107,0,0.2); }
+      .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+      .photo-item { aspect-ratio: 4/3; overflow: hidden; border-radius: 12px; position: relative; cursor: pointer; }
+      .photo-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+      .photo-item:hover img { transform: scale(1.05); }
+      .photo-item .caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); color: var(--white); padding: 1rem 0.8rem 0.6rem; font-size: 0.78rem; font-family: 'Nunito', sans-serif; opacity: 0; transition: opacity 0.3s; }
+      .photo-item:hover .caption { opacity: 1; }
+      .photo-item.wide { grid-column: span 2; aspect-ratio: 16/9; }
+    </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-hero">
+    <h1 class="page-hero-title">Gallery<br><span>Live Photos</span></h1>
+  </div>
+  <div class="page-content">
+    <div class="gallery-section">
+      <h3 class="gallery-section-title">びわこジャズ東近江</h3>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="images/htb/jazz-6846.jpg" alt="野外ライブ 初期">
+          <div class="caption">野外ライブ 初期</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/jazz-6852.jpg" alt="初期ライブ〜Containers時代">
+          <div class="caption">初期ライブ〜Containers時代</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/jazz-4041.jpg" alt="びわこジャズ東近江 デュオ">
+          <div class="caption">びわこジャズ東近江 デュオ</div>
+        </div>
+        <div class="photo-item wide">
+          <img src="images/htb/jazz-4044.jpg" alt="びわこジャズ東近江 フルバンド">
+          <div class="caption">びわこジャズ東近江 フルバンド</div>
+        </div>
+        <div class="photo-item wide">
+          <img src="images/htb/jazz-2023-01.jpg" alt="びわこジャズ東近江 2023">
+          <div class="caption">びわこジャズ東近江 2023</div>
+        </div>
+        <div class="photo-item wide">
+          <img src="images/htb/jazz-2024-01.jpg" alt="びわこジャズ東近江 2024">
+          <div class="caption">びわこジャズ東近江 2024</div>
+        </div>
+        <div class="photo-item wide">
+          <img src="images/htb/jazz-happen.jpg" alt="Happen to Be 2025">
+          <div class="caption">Happen to Be 2025</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/jazz-5308.jpg" alt="びわこJAZZ ステージ">
+          <div class="caption">びわこJAZZ ステージ</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <h3 class="gallery-section-title">イベント</h3>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="images/htb/event-4309.jpg" alt="Bar Live">
+          <div class="caption">Bar Live</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/event-5677.jpg" alt="Summer Session 2024">
+          <div class="caption">Summer Session 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <h3 class="gallery-section-title">練習風景</h3>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="images/htb/studio-5100.jpg" alt="スタジオ練習">
+          <div class="caption">スタジオ練習</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/studio-5101.jpg" alt="スタジオ練習 2">
+          <div class="caption">スタジオ練習 2</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/studio-5241.jpg" alt="練習風景">
+          <div class="caption">練習風景</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/htb/studio-5244.jpg" alt="ギター練習">
+          <div class="caption">ギター練習</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Branch section -->
+    <div style="border-top: 1px solid rgba(45,125,58,0.3); margin: 4rem 0 3rem; padding-top: 4rem;">
+      <div class="section-label" style="color:var(--green-light);">Acoustic Unit</div>
+      <h2 style="font-family:'Paytone One',sans-serif; font-size:clamp(1.8rem,4vw,3rem); margin-bottom:3rem; color:var(--green-light);">Branch</h2>
+
+      <div class="gallery-section">
+        <h3 class="gallery-section-title" style="color:var(--green-light);">太子ホール 2025.09.21</h3>
+        <div class="photo-grid">
+          <div class="photo-item wide">
+            <img src="images/branch/taishi-7313.jpg" alt="太子ホール Branch">
+            <div class="caption">太子ホール — オープンステージ</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/taishi-7319.jpg" alt="Branch ステージ">
+            <div class="caption">Branch ステージ</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/taishi-7320.jpg" alt="Branch ステージ 2">
+            <div class="caption">Branch ステージ 2</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/taishi-thumb.jpg" alt="太子ホール サムネイル">
+            <div class="caption">東近江市 太子ホール</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/taishi-7310.jpg" alt="Branch 3人">
+            <div class="caption">Branch 3人</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-section">
+        <h3 class="gallery-section-title" style="color:var(--green-light);">コミュニティカフェ スマイル 2025.08.24</h3>
+        <div class="photo-grid">
+          <div class="photo-item wide">
+            <img src="images/branch/smile-first-live.jpg" alt="笑顔の木の下で">
+            <div class="caption">笑顔の木の下で〜夏編〜 近江八幡 コミュニティカフェ スマイル</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/smile-7097.jpg" alt="スマイル ライブ">
+            <div class="caption">カフェライブ</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-section">
+        <h3 class="gallery-section-title" style="color:var(--green-light);">はじめてのライブ / 練習風景</h3>
+        <div class="photo-grid">
+          <div class="photo-item wide">
+            <img src="images/branch/studio404.jpg" alt="はじめてのライブ">
+            <div class="caption">"はじめて"のライブ — studio404</div>
+          </div>
+          <div class="photo-item">
+            <img src="images/branch/practice-01.jpg" alt="Branch 練習風景">
+            <div class="caption">Branch 練習風景</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+</body>
+</html>

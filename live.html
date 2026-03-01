@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Schedule | Happen to Be</title>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+        --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+        --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+      nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+      .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+      .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+      .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+      .btn { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2.5rem; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; border-radius: 50px; }
+      .btn-primary { background: var(--orange); color: var(--black); }
+      .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); }
+      .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+      .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+      .section-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.8rem; }
+      .section-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 3rem; }
+      .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent); }
+      .page-hero { padding: 10rem 6vw 5rem; background: var(--black); position: relative; overflow: hidden; }
+      .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+      .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; }
+      .page-hero-title span { color: var(--orange); }
+      .page-content { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+      footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+      .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+      .footer-links { display: flex; gap: 2rem; }
+      .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--orange); }
+      .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+      .live-tag { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; background: var(--orange); color: var(--black); border-radius: 50px; display: inline-block; margin-top: 0.5rem; }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .page-hero { padding: 8rem 1.5rem 3rem; } .page-content { padding: 3rem 1.5rem; } footer { flex-direction: column; text-align: center; } }
+    </style>
+    <style>
+      .live-section { margin-bottom: 5rem; }
+      .live-section h3 { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--orange); text-transform: uppercase; margin-bottom: 2rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,107,0,0.2); }
+      .live-card { display: grid; grid-template-columns: 100px 1fr auto; gap: 2.5rem; align-items: center; padding: 2rem; border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; margin-bottom: 1rem; transition: all 0.3s; background: var(--dark); }
+      .live-card:hover { border-color: rgba(255,107,0,0.3); background: rgba(255,107,0,0.04); }
+      .live-date-month { font-family: 'Nunito', sans-serif; font-size: 0.65rem; letter-spacing: 0.3em; color: var(--gray); text-transform: uppercase; }
+      .live-date-num { font-family: 'Paytone One', sans-serif; font-size: 3rem; color: var(--orange); line-height: 1; }
+      .live-card-info h3 { font-family: 'Paytone One', sans-serif; font-size: 1.4rem; margin-bottom: 0.5rem; border: none; letter-spacing: 0.02em; padding: 0; color: var(--white); }
+      .live-card-info p { font-size: 0.85rem; color: var(--gray); line-height: 1.8; }
+      .past-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+      .past-card { background: var(--dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 1.5rem; }
+      .past-card .year { font-family: 'Paytone One', sans-serif; font-size: 2rem; color: var(--orange); margin-bottom: 0.5rem; }
+      .past-card .event { font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+      .past-card .detail { font-size: 0.8rem; color: var(--gray); line-height: 1.7; }
+      @media (max-width: 768px) { .live-card { grid-template-columns: 70px 1fr; } .live-card .btn { display: none; } }
+    </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-hero">
+    <h1 class="page-hero-title">Live<br><span>Schedule</span></h1>
+  </div>
+  <div class="page-content">
+    <div class="live-section">
+      <h3>Upcoming Shows</h3>
+      <div class="live-card">
+        <div>
+          <div class="live-date-month">April</div>
+          <div class="live-date-num">26</div>
+        </div>
+        <div class="live-card-info">
+          <h3>びわこジャズ東近江 2026</h3>
+          <p>📍 東近江市内特設会場</p>
+          <p>Open: TBA | Start: TBA</p>
+          <span class="live-tag">出演確定</span>
+        </div>
+        <a href="contact.html" class="btn btn-primary">詳細</a>
+      </div>
+      <div class="live-card">
+        <div>
+          <div class="live-date-month">March</div>
+          <div class="live-date-num">22</div>
+        </div>
+        <div class="live-card-info">
+          <h3>春まちライブ</h3>
+          <p>📍 長浜駅まちテラス | 滋賀県長浜市</p>
+          <p>12:00〜 | 観覧無料 | Branch 出演</p>
+          <p style="font-size: 0.75rem; margin-top: 0.5rem;">出演：のらくらPawn / きよたん / pop-up-note / manacoy / Branch</p>
+          <span class="live-tag" style="background: var(--green); color: var(--white);">Branch</span>
+        </div>
+        <a href="https://www.instagram.com/happen_to_be04" target="_blank" class="btn btn-primary">Instagram</a>
+      </div>
+      <div class="live-card">
+        <div>
+          <div class="live-date-month">Coming</div>
+          <div class="live-date-num">Soon</div>
+        </div>
+        <div class="live-card-info">
+          <h3>Next Event — 調整中</h3>
+          <p>📍 東近江エリア</p>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Contact</a>
+      </div>
+    </div>
+
+    <div class="live-section">
+      <h3>Past Shows</h3>
+      <div class="past-grid">
+        <div class="past-card">
+          <div class="year">2025</div>
+          <div class="event">びわこジャズ東近江 2025</div>
+          <div class="detail">ヨルシカ「春泥棒」など新レパートリーに挑戦</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2024</div>
+          <div class="event">びわこジャズ東近江 2024 / Summer Session Event</div>
+          <div class="detail">初の自主企画セッションイベントを開催</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2023</div>
+          <div class="event">びわこジャズ東近江 2023</div>
+          <div class="detail">90年代ロックカバーを中心に出演</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2022</div>
+          <div class="event">びわこジャズ東近江 2022</div>
+          <div class="detail">コロナ明け後の復帰出演</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2019〜2021</div>
+          <div class="event">Happen to Be 改名後の活動スタート</div>
+          <div class="detail">新しいバンド名での活動開始</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2018</div>
+          <div class="event">Containers として出演</div>
+          <div class="detail">びわこJAZZ</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2012〜2016</div>
+          <div class="event">Containers として毎年びわこJAZZ出演</div>
+          <div class="detail">安定した活動時期</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2011</div>
+          <div class="event">The Happy Tongue として出演</div>
+          <div class="detail">ボーカル交代に伴い改名</div>
+        </div>
+        <div class="past-card">
+          <div class="year">2009〜2010</div>
+          <div class="event">Monkey Press として活動開始</div>
+          <div class="detail">バンド結成、原点の時代</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+</body>
+</html>

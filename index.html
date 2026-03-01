@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happen to Be | Rock Band from 東近江</title>
+<link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #FF6B00;
+    --orange-dark: #CC5200;
+    --orange-glow: rgba(255, 107, 0, 0.3);
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --gray: #888888;
+    --white: #F5F0EB;
+    --green: #2D7D3A;
+    --green-light: #4CAF50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.98), transparent);
+    backdrop-filter: blur(4px);
+    transition: background 0.3s;
+  }
+
+  .nav-logo {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.03em;
+    color: var(--orange);
+    text-decoration: none;
+    text-shadow: 0 0 20px var(--orange-glow);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--orange); }
+
+  /* HERO */
+  #hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    padding: 0 6vw;
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    animation: pulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: translate(-50%, -55%) scale(1); opacity: 0.5; }
+    50% { transform: translate(-50%, -55%) scale(1.15); opacity: 1; }
+  }
+
+  .mascot {
+    position: absolute;
+    right: 4%;
+    bottom: 3%;
+    width: 320px;
+    opacity: 0.92;
+    animation: floatDog 6s ease-in-out infinite;
+    mix-blend-mode: normal;
+    pointer-events: none;
+    filter: drop-shadow(0 8px 40px rgba(255,107,0,0.45));
+  }
+
+  @keyframes floatDog {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.5em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: fadeUp 1s ease 0.2s both;
+  }
+
+  .hero-title {
+    font-family: 'Paytone One', sans-serif;
+    font-size: clamp(3.5rem, 12vw, 10rem);
+    line-height: 0.88;
+    letter-spacing: 0.01em;
+    animation: fadeUp 1s ease 0.4s both;
+    max-width: 60vw;
+  }
+
+  .hero-title span {
+    display: block;
+    color: var(--orange);
+    text-shadow: 0 0 50px var(--orange-glow);
+  }
+
+  .hero-subtitle {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 300;
+    font-size: 1rem;
+    letter-spacing: 0.35em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    animation: fadeUp 1s ease 0.6s both;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 3rem;
+    animation: fadeUp 1s ease 0.8s both;
+  }
+
+  .btn {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.9rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: inline-block;
+    border-radius: 50px;
+  }
+
+  .btn-primary { background: var(--orange); color: var(--black); }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); }
+
+  .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    animation: fadeUp 1s ease 1.2s both;
+  }
+
+  .scroll-indicator span {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--orange), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* LIVE BANNER */
+  .live-banner {
+    background: var(--orange);
+    color: var(--black);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .live-banner-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .live-banner-text {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+  }
+
+  .live-banner-date {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    background: var(--black);
+    color: var(--orange);
+    padding: 0.3rem 1.2rem;
+  }
+
+  /* SECTION BASE */
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    color: var(--orange);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Paytone One', sans-serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: 0.01em;
+    margin-bottom: 3rem;
+  }
+
+  .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent); }
+
+  /* ABOUT */
+  .about-wrap {
+    background: var(--black);
+    padding: 8rem 3rem;
+  }
+
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 0.97rem;
+    line-height: 1.95;
+    color: var(--gray);
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p strong { color: var(--white); }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-box {
+    border: 1px solid rgba(255,107,0,0.15);
+    padding: 2rem;
+    position: relative;
+    transition: all 0.3s;
+    border-radius: 16px;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--orange);
+  }
+
+  .stat-box:hover { border-color: var(--orange); background: rgba(255,107,0,0.04); }
+
+  .stat-number {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 2.2rem;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-top: 0.3rem;
+  }
+
+  /* LIVE SECTION */
+  .live-wrap {
+    background: var(--dark);
+    padding: 8rem 3rem;
+  }
+
+  .live-inner { max-width: 1200px; margin: 0 auto; }
+
+  .live-card {
+    border: 1px solid rgba(255,107,0,0.12);
+    padding: 2.5rem 3rem;
+    display: grid;
+    grid-template-columns: 90px 1fr auto;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .live-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(255,107,0,0.06), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .live-card:hover { border-color: var(--orange); transform: translateX(4px); }
+  .live-card:hover::after { opacity: 1; }
+
+  .live-date-num {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 2.4rem;
+    color: var(--orange);
+    line-height: 1;
+    text-align: center;
+  }
+
+  .live-date-month {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+    text-align: center;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .live-card-info h3 {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.5rem;
+  }
+
+  .live-card-info p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--gray);
+    margin-bottom: 0.3rem;
+  }
+
+  .live-tag {
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.8rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  /* MUSIC */
+  .music-wrap { background: var(--black); padding: 8rem 3rem; }
+  .music-inner { max-width: 1200px; margin: 0 auto; }
+
+  .youtube-placeholder {
+    border: 1px solid rgba(255,107,0,0.15);
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark);
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: border-color 0.3s;
+    max-height: 500px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .youtube-placeholder:hover { border-color: var(--orange); }
+
+  .yt-inner {
+    text-align: center;
+    padding: 3rem;
+  }
+
+  .play-btn {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: var(--orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 1.5rem;
+    box-shadow: 0 0 30px var(--orange-glow);
+    animation: pulse 3s ease-in-out infinite;
+  }
+
+  .yt-inner p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .music-tracks {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .track-card {
+    border: 1px solid rgba(255,107,0,0.1);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 16px;
+  }
+
+  .track-card:hover { border-color: var(--orange); background: rgba(255,107,0,0.04); }
+
+  .track-num {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.8rem;
+    color: rgba(255,107,0,0.25);
+    min-width: 2.5rem;
+  }
+
+  .track-info h4 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+  }
+
+  .track-info p { font-size: 0.75rem; color: var(--gray); margin-top: 0.2rem; }
+
+  /* HISTORY TIMELINE */
+  .history-wrap { background: var(--black); padding: 8rem 3rem; }
+  .history-inner { max-width: 1200px; margin: 0 auto; }
+
+  .timeline {
+    position: relative;
+    margin-top: 3rem;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--orange), rgba(255,107,0,0.1));
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2.5rem;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .timeline-item.visible { opacity: 1; transform: translateX(0); }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -0.45rem;
+    top: 0.35rem;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--orange);
+    border: 2px solid var(--black);
+    box-shadow: 0 0 8px var(--orange-glow);
+  }
+
+  .timeline-year {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1rem;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.2rem;
+  }
+
+  .timeline-name {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 0.01em;
+    margin-bottom: 0.35rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.75;
+  }
+
+  .timeline-tag {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: rgba(255,107,0,0.12);
+    color: var(--orange);
+    border: 1px solid rgba(255,107,0,0.25);
+    padding: 0.2rem 0.7rem;
+    border-radius: 50px;
+    margin-top: 0.5rem;
+  }
+
+  /* BRANCH */
+  .branch-wrap {
+    background: linear-gradient(135deg, #0A1A0D 0%, #0A0A0A 60%);
+    padding: 8rem 3rem;
+    border-top: 1px solid rgba(45,125,58,0.2);
+    border-bottom: 1px solid rgba(45,125,58,0.2);
+  }
+
+  .branch-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .branch-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    color: var(--green-light);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .branch-title {
+    font-family: 'Paytone One', sans-serif;
+    font-size: clamp(2.2rem, 5.5vw, 4.5rem);
+    line-height: 1;
+  }
+
+  .branch-title span { color: var(--green-light); }
+
+  .branch-sub {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--green-light);
+    margin: 1.2rem 0 2rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+
+  .branch-text p {
+    font-size: 0.97rem;
+    line-height: 1.95;
+    color: var(--gray);
+    margin-bottom: 1rem;
+  }
+
+  .branch-text p strong { color: var(--white); }
+
+  .branch-visual {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dog-orbit {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 1px solid rgba(76,175,80,0.2);
+    animation: spin 10s linear infinite;
+  }
+
+  .orbit-ring:nth-child(2) {
+    inset: 20px;
+    border-color: rgba(76,175,80,0.1);
+    animation-direction: reverse;
+    animation-duration: 7s;
+  }
+
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* GALLERY */
+  .gallery-wrap { background: var(--dark); padding: 8rem 3rem; }
+  .gallery-inner { max-width: 1200px; margin: 0 auto; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 220px 220px;
+    gap: 8px;
+    margin-top: 3rem;
+  }
+
+  .gallery-item {
+    background: var(--dark2);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(255,107,0,0.05);
+    transition: border-color 0.3s;
+    border-radius: 16px;
+  }
+
+  .gallery-item:first-child { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(8) { grid-column: span 2; }
+
+  .gallery-item:hover { border-color: rgba(255,107,0,0.3); }
+
+  .gallery-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .gallery-item:hover .gallery-label { color: var(--orange); }
+
+  .gallery-hover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255,107,0,0.06);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover .gallery-hover-overlay { opacity: 1; }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .gallery-item:hover img { transform: scale(1.06); }
+
+  .gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+    padding: 1.5rem 1rem 0.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    color: rgba(255,240,230,0.85);
+    text-transform: uppercase;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+
+  /* CONTACT */
+  .contact-wrap { background: var(--black); padding: 8rem 3rem; }
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+  }
+
+  .contact-heading {
+    font-family: 'Paytone One', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.8rem);
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+
+  .contact-heading span { color: var(--orange); }
+
+  .contact-desc {
+    font-size: 0.97rem;
+    line-height: 1.9;
+    color: var(--gray);
+    margin-bottom: 2rem;
+  }
+
+  .social-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .social-link {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,107,0,0.4);
+    padding-bottom: 0.2rem;
+    transition: all 0.2s;
+  }
+
+  .social-link:hover { color: var(--white); border-color: var(--white); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-group label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    background: var(--dark);
+    border: 1px solid rgba(255,107,0,0.12);
+    color: var(--white);
+    padding: 0.85rem 1.2rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: vertical;
+    border-radius: 12px;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus { border-color: var(--orange); }
+
+  .form-group select option { background: var(--dark); }
+
+  .form-submit {
+    background: var(--orange);
+    color: var(--black);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 1rem 2rem;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 0.5rem;
+    border-radius: 50px;
+  }
+
+  .form-submit:hover { background: var(--orange-dark); box-shadow: 0 5px 20px var(--orange-glow); }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(255,107,0,0.1);
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-logo {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.5rem;
+    color: var(--orange);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-links { display: flex; gap: 2rem; }
+
+  .footer-links a {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--orange); }
+
+  .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .about-inner, .branch-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-wrap, .live-wrap, .music-wrap, .branch-wrap, .gallery-wrap, .contact-wrap { padding: 5rem 1.5rem; }
+    .music-tracks { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .gallery-item:first-child { grid-row: span 1; grid-column: span 2; height: 200px; }
+    .gallery-item:nth-child(8) { grid-column: span 2; }
+    .gallery-item { height: 150px; }
+    .live-card { grid-template-columns: 70px 1fr; gap: 1.5rem; }
+    .live-card .btn { display: none; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:38px; width:38px; border-radius:50%; object-fit:cover; vertical-align:middle; margin-right:8px; box-shadow:0 0 8px rgba(255,107,0,0.5);">
+    Happen to Be
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="branch.html">Branch</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Happen to Be イラスト (透過PNG) -->
+  <img class="mascot" src="images/design/htb-illust.png" alt="Happen to Be">
+
+  <h1 class="hero-title">
+    Happen<br><span>to Be</span>
+  </h1>
+
+  <div class="hero-cta">
+    <a href="#live-section" class="btn btn-primary">Next Live →</a>
+    <a href="#music" class="btn btn-outline">Music</a>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<!-- LIVE TICKER BANNER -->
+<div class="live-banner">
+  <span class="live-banner-label">🎷 Next Live</span>
+  <span class="live-banner-text">びわこジャズ東近江 2026</span>
+  <span class="live-banner-date">APR 26, 2026</span>
+</div>
+
+<!-- ABOUT -->
+<div class="about-wrap" id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <p class="section-label">About</p>
+      <h2 class="section-title">たまたま<br>集まって</h2>
+      <p>
+        <strong>Happen to Be</strong> は滋賀県東近江市を拠点に活動するロックバンド。
+        バンド名は近江八幡高校普通科の通称<strong>「八普（はっぷ）」</strong>からギターのYoが命名。
+        "たまたま集まった仲間"という意味も重なります。
+      </p>
+      <p>
+        2009年のびわこJAZZフェスティバル開幕とともに活動スタート。
+        2人から始まり、メンバーの加入・脱退・バンド名の変遷を経て、
+        現在はサブメンバー含め<strong>9人</strong>の大所帯に成長。
+        2019年より「Happen to Be」として毎年びわこジャズ東近江に出演中。
+      </p>
+      <p>
+        音楽を通じて<strong>東近江にコミュニティを作る</strong>ことが目標。
+        ストリートステージの企画・運営など、ライブ以外の場でも地域を盛り上げています。
+      </p>
+      <a href="#contact" class="btn btn-outline" style="margin-top:1.5rem;">Booking Inquiry ›</a>
+    </div>
+
+    <div class="about-stats">
+      <!-- ロゴバッジ -->
+      <div style="grid-column:span 2; display:flex; justify-content:center; margin-bottom:0.5rem;">
+        <img src="images/design/htb-logo.png"
+             alt="Happen to Be Logo"
+             style="width:110px; height:110px; border-radius:50%; object-fit:cover;
+                    border:3px solid var(--orange); box-shadow:0 0 24px rgba(255,107,0,0.5);
+                    animation: floatDog 6s ease-in-out infinite;">
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">2009</div>
+        <div class="stat-label">活動開始 / Since</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Members (incl. sub)</div>
+      </div>
+      <div class="stat-box" style="grid-column:span 2; border-radius:16px;">
+        <div class="stat-label" style="margin-bottom:0.9rem;">Members</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.35rem 1rem; font-size:0.82rem; line-height:1.8; color:var(--white);">
+          <span><span style="color:var(--orange);font-weight:700;">Vo</span>&nbsp; NAMU / Toshi</span>
+          <span><span style="color:var(--orange);font-weight:700;">Key&amp;Vo</span>&nbsp; Makko</span>
+          <span><span style="color:var(--orange);font-weight:700;">G</span>&nbsp; Yo</span>
+          <span><span style="color:var(--orange);font-weight:700;">Ba</span>&nbsp; Motu / Naoki</span>
+          <span><span style="color:var(--orange);font-weight:700;">Dr</span>&nbsp; Takashi</span>
+          <span><span style="color:var(--gray);font-weight:700;">Sub</span>&nbsp; 青木 / まーたん</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- LIVE SCHEDULE -->
+<div class="live-wrap" id="live-section">
+  <div class="live-inner">
+    <p class="section-label">Live Schedule</p>
+    <h2 class="section-title">Upcoming<br>Shows</h2>
+
+    <div class="live-card">
+      <div>
+        <span class="live-date-month">April 2026</span>
+        <div class="live-date-num">26</div>
+      </div>
+      <div class="live-card-info">
+        <h3>びわこジャズ東近江 2026</h3>
+        <p>📍 東近江市内特設会場 &nbsp;|&nbsp; 滋賀県東近江市</p>
+        <p>Open: TBA &nbsp;|&nbsp; Start: TBA</p>
+        <span class="live-tag">出演確定</span>
+      </div>
+      <a href="#contact" class="btn btn-outline">詳細 ›</a>
+    </div>
+
+    <div class="live-card">
+      <div>
+        <span class="live-date-month">Branch · Mar 2026</span>
+        <div class="live-date-num">22</div>
+      </div>
+      <div class="live-card-info">
+        <h3>春まちライブ</h3>
+        <p>📍 長浜駅まちテラス &nbsp;|&nbsp; 滋賀県長浜市</p>
+        <p>12:00〜 &nbsp;|&nbsp; 観覧無料 &nbsp;|&nbsp; Branch 出演</p>
+        <p style="font-size:0.75rem; color:var(--gray); margin-top:0.3rem;">出演：のらくらPawn / きよたん / pop-up-note / manacoy / Branch</p>
+        <span class="live-tag" style="background:var(--green);color:#fff;">Branch</span>
+      </div>
+      <a href="https://www.instagram.com/happen_to_be04" class="btn btn-outline" target="_blank">Instagram ›</a>
+    </div>
+
+    <div class="live-card" style="opacity:0.55;">
+      <div>
+        <span class="live-date-month">Coming Soon</span>
+        <div class="live-date-num" style="font-size:1.8rem;">TBA</div>
+      </div>
+      <div class="live-card-info">
+        <h3>Next Event — 調整中</h3>
+        <p>📍 東近江エリア</p>
+        <p>ブッキングのご相談はContactまで</p>
+      </div>
+      <a href="#contact" class="btn btn-outline">問い合わせ ›</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MUSIC -->
+<div class="music-wrap" id="music">
+  <div class="music-inner">
+    <p class="section-label">Music</p>
+    <h2 class="section-title">Sound &amp;<br>Videos</h2>
+
+    <!-- YouTube channel link -->
+    <div style="text-align:center; margin: 2rem 0 3rem;">
+      <a href="https://www.youtube.com/@happentobe07/videos" target="_blank" class="btn btn-primary" style="font-size:1.1rem; padding: 1rem 2.5rem; display:inline-flex; align-items:center; gap:0.75rem;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube でライブ動画を見る
+      </a>
+    </div>
+
+    <div class="music-tracks">
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=1135s" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">01</div>
+        <div class="track-info"><h4>春泥棒</h4><p>ヨルシカ cover</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=444s" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">02</div>
+        <div class="track-info"><h4>晩餐歌</h4><p>tuki. cover</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=1486s" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">03</div>
+        <div class="track-info"><h4>スローバラード</h4><p>Superfly cover</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">04</div>
+        <div class="track-info"><h4>浪漫飛行</h4><p>米米CLUB cover</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=255s" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">05</div>
+        <div class="track-info"><h4>Runaway Baby</h4><p>Bruno Mars cover</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a class="track-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=773s" target="_blank" style="text-decoration:none;color:inherit;">
+        <div class="track-num">06</div>
+        <div class="track-info"><h4>トリカゴの中の私</h4><p>Happen to Be オリジナル</p></div>
+        <svg style="margin-left:auto;opacity:0.5;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#FF0000"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </div>
+
+    <!-- Branch Sound & Videos -->
+    <div style="margin-top: 4rem; border-top: 1px solid rgba(76,175,80,0.15); padding-top: 3rem;">
+      <p class="section-label" style="color: var(--green-light); margin-bottom: 1rem;">Branch · Acoustic Unit</p>
+      <div style="text-align:center; margin: 0 0 2.5rem;">
+        <a href="https://www.youtube.com/watch?v=I7B8v_f_eQc" target="_blank" class="btn" style="background: var(--green); color: #fff; font-size: 1rem; padding: 0.9rem 2.2rem; display:inline-flex; align-items:center; gap:0.75rem; border-radius:50px; text-decoration:none; box-shadow:0 4px 25px rgba(45,125,58,0.35);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          Branch の動画を見る
+        </a>
+      </div>
+      <div class="music-tracks">
+        <a class="track-card" href="https://www.youtube.com/watch?v=MBeFOKHGm7U" target="_blank" style="text-decoration:none;color:inherit;border-color:rgba(76,175,80,0.1);" onmouseover="this.style.borderColor='rgba(76,175,80,0.4)';this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='rgba(76,175,80,0.1)';this.style.transform='translateX(0)';">
+          <div class="track-num" style="color: rgba(76,175,80,0.5);">01</div>
+          <div class="track-info"><h4>くちばしにチェリー</h4><p>EGO-WRAPPIN' cover</p></div>
+          <svg style="margin-left:auto;opacity:0.6;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#4CAF50"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a class="track-card" href="https://www.youtube.com/watch?v=vTv1NMV3_Xo" target="_blank" style="text-decoration:none;color:inherit;border-color:rgba(76,175,80,0.1);" onmouseover="this.style.borderColor='rgba(76,175,80,0.4)';this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='rgba(76,175,80,0.1)';this.style.transform='translateX(0)';">
+          <div class="track-num" style="color: rgba(76,175,80,0.5);">02</div>
+          <div class="track-info"><h4>青空</h4><p>THE BLUE HEARTS cover</p></div>
+          <svg style="margin-left:auto;opacity:0.6;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#4CAF50"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a class="track-card" href="https://www.youtube.com/watch?v=I7B8v_f_eQc&t=411s" target="_blank" style="text-decoration:none;color:inherit;border-color:rgba(76,175,80,0.1);" onmouseover="this.style.borderColor='rgba(76,175,80,0.4)';this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='rgba(76,175,80,0.1)';this.style.transform='translateX(0)';">
+          <div class="track-num" style="color: rgba(76,175,80,0.5);">03</div>
+          <div class="track-info"><h4>A Love Song</h4><p>EGO-WRAPPIN' cover</p></div>
+          <svg style="margin-left:auto;opacity:0.6;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#4CAF50"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+        <a class="track-card" href="https://www.youtube.com/watch?v=I7B8v_f_eQc&t=989s" target="_blank" style="text-decoration:none;color:inherit;border-color:rgba(76,175,80,0.1);" onmouseover="this.style.borderColor='rgba(76,175,80,0.4)';this.style.transform='translateX(4px)';" onmouseout="this.style.borderColor='rgba(76,175,80,0.1)';this.style.transform='translateX(0)';">
+          <div class="track-num" style="color: rgba(76,175,80,0.5);">04</div>
+          <div class="track-info"><h4>風をあつめて</h4><p>はっぴいえんど cover</p></div>
+          <svg style="margin-left:auto;opacity:0.6;flex-shrink:0;" width="18" height="18" viewBox="0 0 24 24" fill="#4CAF50"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HISTORY -->
+<div class="history-wrap" id="history">
+  <div class="history-inner">
+    <p class="section-label">History</p>
+    <h2 class="section-title">Our<br>Journey</h2>
+
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-year">2009</div>
+        <div class="timeline-name">Monkey Press</div>
+        <div class="timeline-desc">
+          びわこJAZZフェスティバル東近江が第1回を迎えた年にスタート。
+          わずか2人からメンバー集めを始めた原点。
+        </div>
+        <span class="timeline-tag">びわこJAZZ 第1回〜</span>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2011</div>
+        <div class="timeline-name">The Happy Tongue</div>
+        <div class="timeline-desc">
+          ボーカル交代に伴いバンド名を変更。
+          「渚のシンドバット」「心の旅」など幅広いカバーを演奏。
+        </div>
+        <span class="timeline-tag">びわこJAZZ 2011〜</span>
+        <br>
+        <a href="https://www.youtube.com/@TheHAppyTongue" target="_blank" style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.8rem; padding:0.4rem 1rem; background:rgba(255,0,0,0.1); border:1px solid rgba(255,0,0,0.3); border-radius:50px; color:#ff4444; font-family:'Nunito',sans-serif; font-size:0.72rem; letter-spacing:0.1em; text-decoration:none;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          @TheHAppyTongue
+        </a>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2012 – 2018</div>
+        <div class="timeline-name">Containers</div>
+        <div class="timeline-desc">
+          Avril Lavigne・Green Day・あいみょんなど多彩なレパートリーで活躍。
+          U★STONE や びわこジャズフェスティバルに毎年出演。
+        </div>
+        <span class="timeline-tag">びわこJAZZ 2012〜2016, 2018</span>
+        <br>
+        <a href="https://www.youtube.com/@Containers03" target="_blank" style="display:inline-flex; align-items:center; gap:0.5rem; margin-top:0.8rem; padding:0.4rem 1rem; background:rgba(255,0,0,0.1); border:1px solid rgba(255,0,0,0.3); border-radius:50px; color:#ff4444; font-family:'Nunito',sans-serif; font-size:0.72rem; letter-spacing:0.1em; text-decoration:none;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          @Containers03
+        </a>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-year">2019 – Now</div>
+        <div class="timeline-name">Happen to Be</div>
+        <div class="timeline-desc">
+          ギターYoが母校・近江八幡高校普通科の通称<strong style="color:var(--white);">「八普（はっぷ）」</strong>からインスピレーションを得て命名。
+          "たまたま集まった仲間たち"の意も込めて。
+          現在はサブメンバー含め9人体制で東近江を盛り上げ中。
+        </div>
+        <span class="timeline-tag">びわこジャズ東近江 2019〜現在</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BRANCH UNIT -->
+<div class="branch-wrap" id="branch">
+  <div class="branch-inner">
+    <div>
+      <p class="branch-label">Acoustic Unit · Happen to Be より派生</p>
+      <h2 class="branch-title">Branch</h2>
+      <p class="branch-sub">東近江市 · アコースティック · アットホーム</p>
+      <div class="branch-text">
+
+        <p style="margin-bottom:1.2rem;">
+          <strong>Branch（ブランチ）</strong>は、ロックバンド「Happen to Be」から派生した
+          アコースティックユニット。しっとり聴ける楽曲から、みんなで盛り上がれる曲まで
+          幅広いレパートリーで、カフェ・コミュニティスペースなど
+          小〜中規模のアットホームな会場を中心に活動しています。
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem 1.5rem; margin-bottom:1.2rem; font-size:0.82rem; color:var(--gray);">
+          <div><span style="color:var(--green);font-weight:700;">Vo</span>&nbsp; Makko</div>
+          <div><span style="color:var(--green);font-weight:700;">G</span>&nbsp; Yo</div>
+          <div><span style="color:var(--green);font-weight:700;">Ag &amp; Ba</span>&nbsp; Takashi</div>
+          <div><span style="color:var(--green);font-weight:700;">拠点</span>&nbsp; 東近江市（滋賀県）</div>
+        </div>
+
+        <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.5rem; font-size:0.85rem; color:var(--gray);">
+          <li>🎸 アコースティックサウンドにこだわった、温かみのあるステージ</li>
+          <li>🎤 関西弁の自然体なMCも含めた親しみやすいスタイル</li>
+          <li>☕ 近江八幡のコミュニティカフェ・スマイルなど、地域密着の会場で活動</li>
+          <li>👕 BranchオリジナルロゴTシャツも制作中</li>
+        </ul>
+
+        <p style="margin-top:1.2rem; font-size:0.8rem; color:rgba(136,136,136,0.65); border-left:2px solid var(--green); padding-left:0.8rem;">
+          Happen to Be は八幡高校'95卒の6人＋女性Voの7人組ロックバンド。
+          バンド・ユニット・音楽イベント企画チームとして東近江市を盛り上げています。
+        </p>
+      </div>
+    </div>
+
+    <div class="branch-visual">
+      <div class="dog-orbit">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring"></div>
+        <img
+          src="images/design/branch-logo.png"
+          alt="Branch"
+          style="width:300px; height:300px; object-fit:contain; position:relative; z-index:1; filter:drop-shadow(0 0 35px rgba(76,175,80,0.8));"
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<div class="gallery-wrap" id="gallery">
+  <div class="gallery-inner">
+    <p class="section-label">Gallery</p>
+    <h2 class="section-title">Live<br>Photos</h2>
+
+    <div class="gallery-grid">
+      <!-- 2012年頃 初期ライブ（インドア） -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-6852.jpg" alt="初期ライブ">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">初期ライブ 〜Containers時代</div>
+      </div>
+      <!-- 野外ライブ 初期 -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-6846.jpg" alt="野外ライブ">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">野外ライブ</div>
+      </div>
+      <!-- びわこジャズ フルバンド -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-4044.jpg" alt="びわこジャズ東近江">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">びわこジャズ東近江</div>
+      </div>
+      <!-- びわこジャズ 2023 -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-2023-01.jpg" alt="びわこジャズ東近江 2023">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">びわこジャズ東近江 2023</div>
+      </div>
+      <!-- びわこジャズ 2024 -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-2024-01.jpg" alt="びわこジャズ東近江 2024">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">びわこジャズ東近江 2024</div>
+      </div>
+      <!-- スタジオ練習風景 -->
+      <div class="gallery-item">
+        <img src="images/htb/studio-5100.jpg" alt="スタジオ練習">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">スタジオ練習</div>
+      </div>
+      <!-- インドア Bar Live -->
+      <div class="gallery-item">
+        <img src="images/htb/event-4309.jpg" alt="インドアライブ">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">Bar Live</div>
+      </div>
+      <!-- 2025 -->
+      <div class="gallery-item">
+        <img src="images/htb/jazz-happen.jpg" alt="Happen to Be 2025">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">2025 – びわこジャズ東近江</div>
+      </div>
+      <!-- Branch 太子ホール -->
+      <div class="gallery-item">
+        <img src="images/branch/taishi-7319.jpg" alt="Branch 太子ホール">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">Branch — 太子ホール 2025</div>
+      </div>
+      <!-- Branch スマイル -->
+      <div class="gallery-item">
+        <img src="images/branch/smile-first-live.jpg" alt="Branch コミュニティカフェ スマイル">
+        <div class="gallery-hover-overlay"></div>
+        <div class="gallery-caption">Branch — カフェスマイル 2025</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-inner">
+    <div>
+      <p class="section-label">Contact</p>
+      <h2 class="contact-heading">Let's<br>Play<br><span>Together</span></h2>
+      <p class="contact-desc">
+        ライブ出演依頼・コラボレーション・メディア取材など、
+        お気軽にご連絡ください。<br>
+        ご連絡は <strong style="color:var(--white);">Instagram の DM</strong> から受け付けています。
+        東近江エリアを中心に活動していますが、遠方のイベントもぜひご相談ください。
+      </p>
+      <div class="social-links">
+        <a href="https://ig.me/m/happen_to_be04" class="social-link" target="_blank">Instagram DM</a>
+        <a href="https://www.youtube.com/@happentobe07" class="social-link" target="_blank">YouTube</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo" style="display:flex; align-items:center; gap:10px;">
+    <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+    Happen to Be
+  </div>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+    <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+    <a href="#branch">Branch</a>
+  </div>
+  <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+</footer>
+
+<script>
+  // Nav scroll behavior
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.style.background = window.scrollY > 80
+      ? 'rgba(10,10,10,0.97)'
+      : 'linear-gradient(to bottom, rgba(10,10,10,0.98), transparent)';
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
+
+  // Scroll-triggered fade in
+  const fadeItems = document.querySelectorAll('.stat-box, .live-card, .track-card, .gallery-item');
+  fadeItems.forEach(el => {
+    el.style.cssText += 'opacity:0; transform:translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s, background 0.3s;';
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  fadeItems.forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+    observer.observe(el);
+  });
+
+  // Timeline animation
+  const timelineItems = document.querySelectorAll('.timeline-item');
+  const tlObserver = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+        tlObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  timelineItems.forEach(el => tlObserver.observe(el));
+
+  // Form submit placeholder
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.form-submit');
+    btn.textContent = 'Sent! ✓';
+    btn.style.background = '#2D7D3A';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+    }, 3000);
+  }
+</script>
+</body>
+</html>

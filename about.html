@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | Happen to Be</title>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+        --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+        --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+      nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+      .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+      .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+      .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+      .btn { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2.5rem; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; border-radius: 50px; }
+      .btn-primary { background: var(--orange); color: var(--black); }
+      .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); }
+      .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+      .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+      .section-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.8rem; }
+      .section-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 3rem; }
+      .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent); }
+      .page-hero { padding: 10rem 6vw 5rem; background: var(--black); position: relative; overflow: hidden; }
+      .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+      .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; }
+      .page-hero-title span { color: var(--orange); }
+      .page-content { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+      footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+      .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+      .footer-links { display: flex; gap: 2rem; }
+      .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--orange); }
+      .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+      .live-tag { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; background: var(--orange); color: var(--black); border-radius: 50px; display: inline-block; margin-top: 0.5rem; }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .page-hero { padding: 8rem 1.5rem 3rem; } .page-content { padding: 3rem 1.5rem; } footer { flex-direction: column; text-align: center; } }
+    </style>
+    <style>
+      .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; margin-bottom: 5rem; }
+      .about-text p { font-size: 0.97rem; line-height: 2; color: var(--gray); margin-bottom: 1.5rem; }
+      .about-text p strong { color: var(--white); }
+      .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .stat-box { border: 1px solid rgba(255,107,0,0.15); padding: 2rem; border-radius: 16px; transition: all 0.3s; position: relative; }
+      .stat-box::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--orange); border-radius: 3px 0 0 3px; }
+      .stat-box:hover { border-color: var(--orange); background: rgba(255,107,0,0.04); }
+      .stat-number { font-family: 'Paytone One', sans-serif; font-size: 2.2rem; color: var(--orange); line-height: 1; }
+      .stat-label { font-family: 'Nunito', sans-serif; font-size: 0.72rem; letter-spacing: 0.25em; color: var(--gray); text-transform: uppercase; margin-top: 0.4rem; }
+      .logo-badge { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+      @media (max-width: 768px) { .about-inner { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-hero">
+    <h1 class="page-hero-title">About<br><span>たまたま集まって</span></h1>
+  </div>
+  <div class="page-content">
+    <div class="about-inner">
+      <div class="about-text">
+        <p>Happen to Be は滋賀県東近江市を拠点に活動するロックバンド。バンド名は近江八幡高校普通科の通称「八普（はっぷ）」からギターのYoが命名。"たまたま集まった仲間"という意味も重なります。</p>
+        <p>2009年のびわこJAZZフェスティバル開幕とともに活動スタート。2人から始まり、メンバーの加入・脱退・バンド名の変遷を経て、現在はサブメンバー含め9人の大所帯に成長。</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">2009</div>
+          <div class="stat-label">Since</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">9</div>
+          <div class="stat-label">Members</div>
+        </div>
+        <div class="stat-box" style="grid-column: span 2;">
+          <div style="font-size: 0.9rem; color: var(--gray); line-height: 1.8;">
+            <div style="margin-bottom: 0.8rem;"><span style="color: var(--white); font-weight: 700;">Vo</span> NAMU / Toshi</div>
+            <div style="margin-bottom: 0.8rem;"><span style="color: var(--white); font-weight: 700;">Key &amp; Vo</span> Makko</div>
+            <div style="margin-bottom: 0.8rem;"><span style="color: var(--white); font-weight: 700;">G</span> Yo</div>
+            <div style="margin-bottom: 0.8rem;"><span style="color: var(--white); font-weight: 700;">Ba</span> Motu / Naoki</div>
+            <div style="margin-bottom: 0.8rem;"><span style="color: var(--white); font-weight: 700;">Dr</span> Takashi</div>
+            <div><span style="color: var(--white); font-weight: 700;">Sub</span> 青木 / まーたん</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+</body>
+</html>

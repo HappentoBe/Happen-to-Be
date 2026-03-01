@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Branch | Happen to Be</title>
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+        --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+        --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+      nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+      .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+      .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+      .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+      .btn { font-family: 'Nunito', sans-serif; font-size: 0.85rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2.5rem; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; border-radius: 50px; }
+      .btn-primary { background: var(--orange); color: var(--black); }
+      .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 25px var(--orange-glow); }
+      .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); }
+      .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+      .section-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.8rem; }
+      .section-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 3rem; }
+      .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, rgba(255,107,0,0.3), transparent); }
+      .page-hero { padding: 10rem 6vw 5rem; background: var(--black); position: relative; overflow: hidden; }
+      .page-hero::before { content: ''; position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+      .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(3rem, 9vw, 7rem); line-height: 0.9; }
+      .page-hero-title span { color: var(--orange); }
+      .page-content { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+      footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+      .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+      .footer-links { display: flex; gap: 2rem; }
+      .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+      .footer-links a:hover { color: var(--orange); }
+      .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+      .live-tag { font-family: 'Nunito', sans-serif; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.3rem 0.9rem; background: var(--orange); color: var(--black); border-radius: 50px; display: inline-block; margin-top: 0.5rem; }
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+      @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .page-hero { padding: 8rem 1.5rem 3rem; } .page-content { padding: 3rem 1.5rem; } footer { flex-direction: column; text-align: center; } }
+    </style>
+    <style>
+      .branch-hero { background: linear-gradient(135deg, #0A1A0D 0%, #0A0A0A 60%); padding: 10rem 6vw 6rem; position: relative; overflow: hidden; border-bottom: 1px solid rgba(45,125,58,0.2); }
+      .branch-hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(45,125,58,0.2) 0%, transparent 70%); right: 5%; top: 20%; }
+      .branch-label { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--green-light); text-transform: uppercase; margin-bottom: 0.8rem; }
+      .branch-title { font-family: 'Paytone One', sans-serif; font-size: clamp(3rem, 9vw, 7rem); color: var(--green-light); line-height: 0.9; margin-bottom: 1.5rem; }
+      .branch-logo { width: 220px; height: 220px; object-fit: contain; filter: drop-shadow(0 0 30px rgba(76,175,80,0.6)); animation: floatDog 6s ease-in-out infinite; }
+      @keyframes floatDog { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-12px) rotate(1deg)} }
+      .branch-inner { display: grid; grid-template-columns: 1fr 300px; gap: 5rem; align-items: start; margin-bottom: 5rem; }
+      .branch-text p { font-size: 0.95rem; color: var(--gray); line-height: 2; margin-bottom: 1.2rem; }
+      .branch-text strong { color: var(--white); }
+      .member-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 2rem; margin: 1.5rem 0; font-size: 0.85rem; color: var(--gray); }
+      .member-row .role { color: var(--green-light); font-weight: 700; }
+      .feature-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.6rem; font-size: 0.88rem; color: var(--gray); }
+      .note-box { margin-top: 1.5rem; border-left: 2px solid var(--green); padding-left: 1rem; font-size: 0.82rem; color: rgba(136,136,136,0.7); line-height: 1.8; }
+      @media (max-width: 768px) { .branch-inner { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+    <div class="branch-hero" style="padding: 10rem 6vw 4rem;">
+      <div class="branch-label">Acoustic Unit · Happen to Be より派生</div>
+      <h1 class="branch-title">Branch</h1>
+    </div>
+
+    <div class="page-content">
+      <div class="branch-inner">
+        <div class="branch-text">
+          <p><strong>Branch（ブランチ）</strong>はロックバンド「Happen to Be」から派生したアコースティックユニット。しっとり聴ける楽曲から、みんなで盛り上がれる曲まで幅広いレパートリーで、カフェ・コミュニティスペースなど小〜中規模のアットホームな会場を中心に活動しています。</p>
+          
+          <div class="member-row">
+            <span class="role">Vo</span>
+            <span>Makko</span>
+            <span class="role">G</span>
+            <span>Yo</span>
+          </div>
+          <div class="member-row">
+            <span class="role">Ag &amp; Ba</span>
+            <span>Takashi</span>
+            <span class="role">拠点</span>
+            <span>東近江市（滋賀県）</span>
+          </div>
+
+          <ul class="feature-list">
+            <li>🎸 アコースティックサウンドにこだわった温かみのあるステージ</li>
+            <li>🎤 関西弁の自然体なMCも含めた親しみやすいスタイル</li>
+            <li>☕ 近江八幡のコミュニティカフェ・スマイルなど地域密着の会場で活動</li>
+            <li>👕 BranchオリジナルロゴTシャツも制作中</li>
+          </ul>
+
+          <div class="note-box">
+            <strong>Happen to Be</strong> は八幡高校'95卒の6人＋女性Voの7人組ロックバンド。バンド・ユニット・音楽イベント企画チームとして東近江市を盛り上げています。
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: center; align-items: center;">
+          <img src="images/design/branch-logo.png" alt="Branch" class="branch-logo">
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem; padding-top: 3rem; border-top: 1px solid rgba(255,107,0,0.1);">
+        <h3 style="font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.4em; color: var(--orange); text-transform: uppercase; margin-bottom: 2rem;">Branch Live</h3>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+          <div style="background: var(--dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 1.5rem;">
+            <div style="font-family: 'Paytone One', sans-serif; font-size: 1.2rem; color: var(--orange); margin-bottom: 0.5rem;">2026/3/22</div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem;">春まちライブ</div>
+            <div style="font-size: 0.85rem; color: var(--gray); line-height: 1.6;">📍 長浜駅まちテラス<br>12:00〜 | 観覧無料</div>
+          </div>
+          <div style="background: var(--dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 16px; padding: 1.5rem;">
+            <div style="font-family: 'Paytone One', sans-serif; font-size: 1.2rem; color: var(--orange); margin-bottom: 0.5rem;">2025/8/24</div>
+            <div style="font-size: 0.9rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem;">コミュニティカフェスマイル</div>
+            <div style="font-size: 0.85rem; color: var(--gray); line-height: 1.6;">📍 近江八幡<br>Branch出演</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+</body>
+</html>
