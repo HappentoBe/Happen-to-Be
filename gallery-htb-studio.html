@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>練習風景 | Happen to Be</title>
+  <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+      --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+      --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+    .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+    .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+    .page-hero { padding: 8rem 6vw 3rem; background: var(--black); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+    .page-hero-eyebrow { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 0.8rem; }
+    .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 0.95; }
+    .page-hero-title span { color: var(--orange); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Nunito', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; margin-top: 1.5rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--orange); }
+    .page-content { max-width: 1200px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+    /* Year sections */
+    .year-section { margin-bottom: 4rem; }
+    .year-label { font-family: 'Paytone One', sans-serif; font-size: 2.5rem; color: var(--orange); margin-bottom: 1rem; opacity: 0.9; }
+    .year-divider { width: 100%; height: 1px; background: linear-gradient(to right, rgba(255,107,0,0.4), transparent); margin-bottom: 1.5rem; }
+    /* Masonry grid */
+    .masonry { columns: 3; column-gap: 10px; }
+    .masonry-item { break-inside: avoid; margin-bottom: 10px; border-radius: 12px; overflow: hidden; position: relative; }
+    .masonry-item img { width: 100%; display: block; transition: transform 0.4s; }
+    .masonry-item:hover img { transform: scale(1.04); }
+    .masonry-item .caption { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: #fff; padding: 2rem 1rem 0.8rem; font-size: 0.8rem; font-family: 'Nunito', sans-serif; opacity: 0; transition: opacity 0.3s; }
+    .masonry-item:hover .caption { opacity: 1; }
+    /* YouTube */
+    .yt-section { margin-top: 4rem; }
+    .yt-section-title { font-family: 'Nunito', sans-serif; font-size: 0.7rem; letter-spacing: 0.5em; color: var(--orange); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(255,107,0,0.2); }
+    .yt-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .yt-card { position: relative; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; }
+    .yt-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.4s; }
+    .yt-card:hover img { transform: scale(1.04); }
+    .yt-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+    .yt-card:hover .yt-overlay { background: rgba(0,0,0,0.15); }
+    .yt-play { width: 52px; height: 52px; background: #FF0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .yt-play svg { margin-left: 4px; }
+    .yt-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 1.5rem 1rem 0.8rem; }
+    .yt-info h4 { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 0.9rem; color: #fff; }
+    .yt-info p { font-family: 'Nunito', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem; }
+    /* Green theme for Branch */
+    .green .page-hero-eyebrow, .green .year-label, .green .yt-section-title { color: var(--green-light); }
+    .green .page-hero-title span { color: var(--green-light); }
+    .green .year-divider { background: linear-gradient(to right, rgba(76,175,80,0.4), transparent); }
+    .green .yt-section-title { border-bottom-color: rgba(76,175,80,0.2); }
+    .green .back-link:hover { color: var(--green-light); }
+    @media (max-width: 768px) { nav { padding: 1rem 1.5rem; } .nav-links { display: none; } .masonry { columns: 2; } .page-content { padding: 3rem 1.5rem; } footer { flex-direction: column; text-align: center; } }
+    @media (max-width: 480px) { .masonry { columns: 1; } }
+  </style>
+</head>
+<body class="">
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">練習風景</p>
+    <h1 class="page-hero-title">Studio<br><span>Shots</span></h1>
+    <a href="gallery.html" class="back-link">← Gallery に戻る</a>
+  </div>
+  <div class="page-content">
+  <div class="masonry">
+      <div class="masonry-item">
+        <img src="images/htb/studio-5100.jpg" alt="スタジオ練習" loading="lazy">
+        <div class="caption">スタジオ練習</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-5101.jpg" alt="スタジオ練習" loading="lazy">
+        <div class="caption">スタジオ練習</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-5241.jpg" alt="練習風景" loading="lazy">
+        <div class="caption">練習風景</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-5244.jpg" alt="ギター練習" loading="lazy">
+        <div class="caption">ギター練習</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-01.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-02.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-03.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-04.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-05.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-06.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-07.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+      <div class="masonry-item">
+        <img src="images/htb/studio-add-08.jpg" alt="スタジオ" loading="lazy">
+        <div class="caption">スタジオ</div>
+      </div>
+  </div>
+  <div class="yt-section">
+    <p class="yt-section-title">YouTube</p>
+    <div class="yt-grid">
+    <a class="yt-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=444" target="_blank">
+      <img src="https://img.youtube.com/vi/kc59qfTCh2o/hqdefault.jpg" alt="晩餐歌" loading="lazy">
+      <div class="yt-overlay"><div class="yt-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="yt-info"><h4>晩餐歌</h4><p>tuki. cover</p></div>
+    </a>
+    <a class="yt-card" href="https://www.youtube.com/watch?v=kc59qfTCh2o&t=1486" target="_blank">
+      <img src="https://img.youtube.com/vi/kc59qfTCh2o/hqdefault.jpg" alt="スローバラード" loading="lazy">
+      <div class="yt-overlay"><div class="yt-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+      <div class="yt-info"><h4>スローバラード</h4><p>Superfly cover</p></div>
+    </a>
+    </div>
+  </div>
+  </div>
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+</body>
+</html>
