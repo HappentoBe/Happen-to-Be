@@ -902,6 +902,61 @@
     .live-card .btn { display: none; }
     footer { flex-direction: column; text-align: center; }
   }
+
+  /* ── HAMBURGER MENU ── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 201;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white, #F5F0EB);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  .mobile-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.97);
+    z-index: 200;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .mobile-overlay.open { display: flex; }
+  .mobile-overlay a {
+    font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white, #F5F0EB);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .mobile-overlay a:hover { color: var(--orange, #FF6B00); }
+
+  @media (max-width: 768px) {
+    .hamburger { display: flex; }
+  }
 </style>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-H86WSKQS8F"></script>
@@ -930,6 +985,9 @@
     <li><a href="contact.html">Contact</a></li>
     <li><a href="bbs.html">BBS</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -1447,6 +1505,33 @@
       btn.style.background = '';
     }, 3000);
   }
+</script>
+<div class="mobile-overlay" id="mobileOverlay">
+    <a href="about.html">About</a>
+    <a href="live.html">Live</a>
+    <a href="music.html">Music</a>
+    <a href="history.html">History</a>
+    <a href="branch.html">Branch</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="bbs.html">BBS</a>
+</div>
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var overlay = document.getElementById('mobileOverlay');
+  if (!btn || !overlay) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    overlay.classList.toggle('open');
+  });
+  overlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  });
+})();
 </script>
 </body>
 </html>
