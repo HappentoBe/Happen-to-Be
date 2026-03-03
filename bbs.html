@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掲示板 | Happen to Be</title>
+<link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+
+<!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H86WSKQS8F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H86WSKQS8F');
+  </script>
+</head>
+
+<style>
+  :root {
+    --orange: #FF6B00;
+    --orange-dark: #CC5200;
+    --orange-glow: rgba(255, 107, 0, 0.3);
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --gray: #888888;
+    --white: #F5F0EB;
+    --green: #2D7D3A;
+    --green-light: #4CAF50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,10,10,0.95);
+    border-bottom: 1px solid rgba(255,107,0,0.2);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 1.4rem;
+    color: var(--orange);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+
+  /* PAGE HEADER */
+  .page-header {
+    padding: 8rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255,107,0,0.15);
+  }
+  .page-header h1 {
+    font-family: 'Paytone One', sans-serif;
+    font-size: 2.5rem;
+    color: var(--orange);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  .page-header p {
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+
+  /* MAIN CONTENT */
+  .bbs-wrapper {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* POST FORM */
+  .post-form {
+    background: var(--dark2);
+    border: 1px solid rgba(255,107,0,0.3);
+    border-radius: 12px;
+    padding: 1.8rem;
+    margin-bottom: 2.5rem;
+  }
+  .post-form h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--orange);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .form-row {
+    display: flex;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .form-label {
+    font-size: 0.78rem;
+    color: var(--gray);
+    width: 50px;
+    padding-top: 0.7rem;
+    flex-shrink: 0;
+  }
+  .form-input {
+    flex: 1;
+    background: #0f0f0f;
+    border: 1px solid #333;
+    border-radius: 8px;
+    color: var(--white);
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.9rem;
+    transition: border-color 0.2s;
+    min-width: 0;
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--orange);
+  }
+  textarea.form-input {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+  }
+  .submit-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .char-count {
+    font-size: 0.78rem;
+    color: var(--gray);
+  }
+  .btn-post {
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 0.65rem 2rem;
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    letter-spacing: 0.05em;
+  }
+  .btn-post:hover { background: var(--orange-dark); }
+  .btn-post:active { transform: scale(0.97); }
+  .btn-post:disabled {
+    background: #444;
+    color: #777;
+    cursor: not-allowed;
+  }
+
+  /* COMMENT COUNT */
+  .comment-count {
+    font-size: 0.82rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .comment-count span {
+    color: var(--orange);
+    font-weight: 700;
+  }
+
+  /* COMMENT LIST */
+  .comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .comment-item {
+    background: var(--dark2);
+    border: 1px solid #222;
+    border-left: 3px solid var(--orange);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    transition: border-color 0.2s;
+  }
+  .comment-item:hover {
+    border-color: #333;
+    border-left-color: var(--orange);
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .comment-num {
+    font-size: 0.72rem;
+    color: var(--gray);
+    font-family: 'Nunito', sans-serif;
+    flex-shrink: 0;
+  }
+  .comment-name {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--orange);
+  }
+  .comment-date {
+    font-size: 0.72rem;
+    color: var(--gray);
+    margin-left: auto;
+    font-family: 'Nunito', sans-serif;
+    flex-shrink: 0;
+  }
+  .comment-body {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--white);
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--gray);
+    font-size: 0.9rem;
+  }
+  .empty-state .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+  }
+
+  /* LOADING */
+  .loading {
+    text-align: center;
+    padding: 2rem;
+    color: var(--gray);
+    font-size: 0.88rem;
+  }
+
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--orange);
+    color: #fff;
+    padding: 0.7rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    z-index: 999;
+    transition: transform 0.3s ease;
+    pointer-events: none;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    border-top: 1px solid rgba(255,107,0,0.1);
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--gray);
+  }
+  footer a { color: var(--gray); text-decoration: none; }
+  footer a:hover { color: var(--orange); }
+
+  /* MOBILE */
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .page-header h1 { font-size: 1.8rem; }
+    .form-row { flex-direction: column; }
+    .form-label { padding-top: 0; width: auto; }
+  }
+</style>
+
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Happen to Be</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="live.html">Live</a></li>
+    <li><a href="music.html">Music</a></li>
+    <li><a href="history.html">History</a></li>
+    <li><a href="branch.html">Branch</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="bbs.html" class="active">BBS</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <h1>📝 BBS</h1>
+  <p>気軽にコメントを残してください！</p>
+</div>
+
+<div class="bbs-wrapper">
+
+  <!-- 書き込みフォーム -->
+  <div class="post-form">
+    <h2>✏️ 書き込む</h2>
+    <div class="form-row">
+      <span class="form-label">名前</span>
+      <input type="text" id="nameInput" class="form-input" placeholder="名無しさん" maxlength="30">
+    </div>
+    <div class="form-row">
+      <span class="form-label">本文</span>
+      <textarea id="bodyInput" class="form-input" placeholder="コメントを入力..." maxlength="300"></textarea>
+    </div>
+    <div class="submit-row">
+      <span class="char-count"><span id="charCount">0</span> / 300</span>
+      <button class="btn-post" id="postBtn" disabled>書き込む 📝</button>
+    </div>
+  </div>
+
+  <!-- コメント数 -->
+  <div class="comment-count" id="commentCount">読み込み中...</div>
+
+  <!-- コメント一覧 -->
+  <div class="comment-list" id="commentList">
+    <div class="loading">読み込み中...</div>
+  </div>
+
+</div>
+
+<footer>
+  <p style="margin-bottom:0.5rem;">
+    <a href="index.html">Home</a> ·
+    <a href="about.html">About</a> ·
+    <a href="live.html">Live</a> ·
+    <a href="music.html">Music</a> ·
+    <a href="gallery.html">Gallery</a>
+  </p>
+  <p>© 2024 Happen to Be. All rights reserved.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.10.0/firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDYxJEfVI9I_36E4ECgcMhdHEwkZWM-V6o",
+    authDomain: "happen-to-be.firebaseapp.com",
+    projectId: "happen-to-be",
+    storageBucket: "happen-to-be.firebasestorage.app",
+    messagingSenderId: "1060329831439",
+    appId: "1:1060329831439:web:2443583ef07c600972777a",
+    measurementId: "G-VJBBE2HJ0Q"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  const nameInput    = document.getElementById('nameInput');
+  const bodyInput    = document.getElementById('bodyInput');
+  const postBtn      = document.getElementById('postBtn');
+  const charCount    = document.getElementById('charCount');
+  const commentList  = document.getElementById('commentList');
+  const commentCount = document.getElementById('commentCount');
+  const toast        = document.getElementById('toast');
+
+  // 文字数カウント・ボタン制御
+  bodyInput.addEventListener('input', () => {
+    const len = bodyInput.value.length;
+    charCount.textContent = len;
+    postBtn.disabled = len === 0;
+  });
+
+  // 書き込み
+  postBtn.addEventListener('click', async () => {
+    const name = nameInput.value.trim() || '名無しさん';
+    const body = bodyInput.value.trim();
+    if (!body) return;
+
+    postBtn.disabled = true;
+    postBtn.textContent = '送信中...';
+
+    try {
+      await addDoc(collection(db, 'bbs'), {
+        name,
+        body,
+        createdAt: serverTimestamp()
+      });
+      nameInput.value = '';
+      bodyInput.value = '';
+      charCount.textContent = '0';
+      showToast('書き込みました！🎸');
+    } catch (e) {
+      showToast('エラーが発生しました。もう一度試してください。');
+      console.error(e);
+    }
+
+    postBtn.textContent = '書き込む 📝';
+    postBtn.disabled = true;
+  });
+
+  // リアルタイム取得
+  const q = query(collection(db, 'bbs'), orderBy('createdAt', 'desc'));
+
+  onSnapshot(q, (snapshot) => {
+    const docs = snapshot.docs;
+    const total = docs.length;
+
+    commentCount.innerHTML = `コメント <span>${total}</span> 件`;
+
+    if (total === 0) {
+      commentList.innerHTML = `
+        <div class="empty-state">
+          <div class="icon">🎵</div>
+          <p>まだコメントがありません。<br>最初の書き込みをどうぞ！</p>
+        </div>`;
+      return;
+    }
+
+    commentList.innerHTML = docs.map((doc, i) => {
+      const d = doc.data();
+      const date = d.createdAt
+        ? new Date(d.createdAt.seconds * 1000).toLocaleString('ja-JP', {
+            year: 'numeric', month: 'numeric', day: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          })
+        : '---';
+      const num = total - i;
+      const name = escHtml(d.name || '名無しさん');
+      const body = escHtml(d.body || '');
+
+      return `
+        <div class="comment-item">
+          <div class="comment-header">
+            <span class="comment-num">No.${num}</span>
+            <span class="comment-name">🎸 ${name}</span>
+            <span class="comment-date">${date}</span>
+          </div>
+          <div class="comment-body">${body}</div>
+        </div>`;
+    }).join('');
+  });
+
+  // HTMLエスケープ
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+              .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // トースト通知
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2500);
+  }
+</script>
+
+</body>
+</html>
