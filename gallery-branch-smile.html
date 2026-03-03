@@ -120,6 +120,27 @@
   }
   .mobile-overlay a:hover { color: var(--orange, #FF6B00); }
 
+  .mobile-close {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 2rem;
+    background: none;
+    border: 2px solid rgba(245,240,235,0.5);
+    border-radius: 50%;
+    color: var(--white, #F5F0EB);
+    font-size: 1.2rem;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .mobile-close:hover {
+    border-color: var(--orange, #FF6B00);
+    color: var(--orange, #FF6B00);
+  }
   @media (max-width: 768px) {
     .hamburger { display: flex; }
   }
@@ -223,6 +244,7 @@
     <a href="gallery.html">Gallery</a>
     <a href="contact.html">Contact</a>
     <a href="bbs.html">BBS</a>
+    <button class="mobile-close" id="mobileClose" aria-label="閉じる">✕</button>
 </div>
 <script>
 (function(){
@@ -239,6 +261,13 @@
       overlay.classList.remove('open');
     });
   });
+  var closeBtn = document.getElementById('mobileClose');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', function(){
+      btn.classList.remove('open');
+      overlay.classList.remove('open');
+    });
+  }
 })();
 </script>
 </body>
