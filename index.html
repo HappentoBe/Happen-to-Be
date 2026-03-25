@@ -387,6 +387,7 @@
     background: linear-gradient(90deg, rgba(255,107,0,0.06), transparent);
     opacity: 0;
     transition: opacity 0.3s;
+    pointer-events: none;
   }
 
   .live-card:hover { border-color: var(--orange); transform: translateX(4px); }
@@ -904,7 +905,6 @@
     .gallery-item:nth-child(8) { grid-column: span 2; }
     .gallery-item { height: 150px; }
     .live-card { grid-template-columns: 70px 1fr; gap: 1.5rem; }
-    .live-card .btn { display: none; }
     footer { flex-direction: column; text-align: center; }
   }
 
@@ -1120,7 +1120,7 @@
         <p>Open: TBA &nbsp;|&nbsp; Start: TBA</p>
         <span class="live-tag">出演確定</span>
       </div>
-      <a href="#contact" class="btn btn-outline">詳細 ›</a>
+      <a href="https://biwako-jazzfes.com/2026/" class="btn btn-outline" target="_blank">詳細 ›</a>
     </div>
 
     <div class="live-card" style="opacity:0.55;">
