@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/png" href="images/design/htb-logo.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clap Hands — Lyrics &amp; Chords | Happen to Be</title>
+  <link href="https://fonts.googleapis.com/css2?family=Paytone+One&family=Nunito:wght@300;400;600;700;800&family=M+PLUS+Rounded+1c:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --orange: #FF6B00; --orange-dark: #CC5200; --orange-glow: rgba(255,107,0,0.3);
+      --black: #0A0A0A; --dark: #111111; --dark2: #1A1A1A; --gray: #888888;
+      --white: #F5F0EB; --green: #2D7D3A; --green-light: #4CAF50;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--white); font-family: 'M PLUS Rounded 1c', sans-serif; overflow-x: hidden; }
+    nav { position: fixed; top: 0; width: 100%; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(10,10,10,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255,107,0,0.1); }
+    .nav-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; letter-spacing: 0.03em; color: var(--orange); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Nunito', sans-serif; font-size: 0.85rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--orange); }
+    footer { background: #050505; padding: 3rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,107,0,0.1); }
+    .footer-logo { font-family: 'Paytone One', sans-serif; font-size: 1.5rem; color: var(--orange); display: flex; align-items: center; gap: 10px; }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-copy { font-size: 0.72rem; color: rgba(136,136,136,0.6); letter-spacing: 0.05em; }
+    .page-hero { padding: 8rem 6vw 3rem; background: var(--black); position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: radial-gradient(circle, rgba(76,175,80,0.15) 0%, transparent 70%); top: 0; right: 0; pointer-events: none; }
+    .page-hero-eyebrow { font-family: 'Nunito', sans-serif; font-size: 0.75rem; letter-spacing: 0.5em; color: var(--green-light); text-transform: uppercase; margin-bottom: 0.8rem; }
+    .page-hero-title { font-family: 'Paytone One', sans-serif; font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 0.95; }
+    .page-hero-title span { color: var(--green-light); }
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'Nunito', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--gray); text-decoration: none; text-transform: uppercase; margin-top: 1.5rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--green-light); }
+    .page-content { max-width: 860px; margin: 0 auto; padding: 4rem 3rem 6rem; }
+
+    /* ── Chord + Lyrics ── */
+    .chord-section { margin-bottom: 3rem; }
+    .chord-section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--green-light);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .chord-block {
+      background: var(--dark);
+      border: 1px solid rgba(76,175,80,0.1);
+      border-radius: 12px;
+      padding: 1.5rem 1.8rem;
+      overflow-x: auto;
+    }
+    .chord-line {
+      display: block;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--green-light);
+      letter-spacing: 0.05em;
+      white-space: pre;
+      line-height: 1.4;
+    }
+    .lyric-line {
+      display: block;
+      font-family: 'M PLUS Rounded 1c', sans-serif;
+      font-size: 0.95rem;
+      color: var(--gray);
+      white-space: pre;
+      line-height: 2;
+      margin-bottom: 0.6rem;
+    }
+    .lyric-note {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      color: rgba(136,136,136,0.6);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    /* ── Section divider ── */
+    .section-divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, rgba(76,175,80,0.3), transparent);
+      margin: 3rem 0;
+    }
+
+    /* ── Translation section ── */
+    .translation-section { margin-bottom: 2.5rem; }
+    .translation-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.4em;
+      color: var(--green-light);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .translation-text {
+      color: var(--gray);
+      font-size: 0.95rem;
+      line-height: 2;
+    }
+    .translation-text p { margin-bottom: 0.3rem; }
+    .translation-text .t-note {
+      font-size: 0.8rem;
+      color: rgba(136,136,136,0.6);
+      font-style: italic;
+    }
+
+    /* ── YouTube ── */
+    .yt-section { margin-top: 4rem; }
+    .yt-section-title { font-family: 'Nunito', sans-serif; font-size: 0.7rem; letter-spacing: 0.5em; color: var(--green-light); text-transform: uppercase; margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(76,175,80,0.2); }
+    .yt-card { position: relative; border-radius: 12px; overflow: hidden; display: block; text-decoration: none; max-width: 560px; }
+    .yt-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; transition: transform 0.4s; }
+    .yt-card:hover img { transform: scale(1.04); }
+    .yt-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+    .yt-card:hover .yt-overlay { background: rgba(0,0,0,0.15); }
+    .yt-play { width: 52px; height: 52px; background: #FF0000; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .yt-play svg { margin-left: 4px; }
+    .yt-info { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.9)); padding: 1.5rem 1rem 0.8rem; }
+    .yt-info h4 { font-family: 'M PLUS Rounded 1c', sans-serif; font-size: 0.9rem; color: #fff; }
+    .yt-info p { font-family: 'Nunito', sans-serif; font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 0.2rem; }
+
+    /* ── Hamburger ── */
+    .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; gap: 5px; width: 40px; height: 40px; background: none; border: none; cursor: pointer; padding: 5px; z-index: 201; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white, #F5F0EB); border-radius: 2px; transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mobile-overlay { display: none; position: fixed; inset: 0; background: rgba(10,10,10,0.97); z-index: 200; flex-direction: column; justify-content: center; align-items: center; gap: 2rem; }
+    .mobile-overlay.open { display: flex; }
+    .mobile-overlay a { font-family: 'Nunito', 'M PLUS Rounded 1c', sans-serif; font-size: 1.5rem; font-weight: 700; color: var(--white, #F5F0EB); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase; transition: color 0.2s; }
+    .mobile-overlay a:hover { color: var(--orange, #FF6B00); }
+    .mobile-close { position: absolute; bottom: 2.5rem; left: 2rem; background: none; border: 2px solid rgba(245,240,235,0.5); border-radius: 50%; color: var(--white, #F5F0EB); font-size: 1.2rem; width: 48px; height: 48px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s, color 0.2s; }
+    .mobile-close:hover { border-color: var(--orange, #FF6B00); color: var(--orange, #FF6B00); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .page-content { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+      .chord-block { padding: 1rem 1rem; }
+      .chord-line, .lyric-line { font-size: 0.78rem; }
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H86WSKQS8F"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-H86WSKQS8F');
+  </script>
+</head>
+<body class="green">
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="live.html">Live</a></li>
+      <li><a href="music.html" class="active">Music</a></li>
+      <li><a href="history.html">History</a></li>
+      <li><a href="branch.html">Branch</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="bbs.html">BBS</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="メニュー">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-hero-eyebrow">Branch · Original</p>
+    <h1 class="page-hero-title">Clap<br><span>Hands</span></h1>
+    <a href="music.html" class="back-link">← Music に戻る</a>
+  </div>
+
+  <div class="page-content">
+
+    <!-- ══ Intro ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Intro</p>
+      <div class="chord-block">
+        <span class="chord-line">Am7       D7       GM7         Em7</span>
+        <span class="lyric-line"> </span>
+        <span class="chord-line">Am7       D7       Bm7         Em7</span>
+        <span class="lyric-line"> </span>
+      </div>
+    </div>
+
+    <!-- ══ Verse 1 ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Verse 1</p>
+      <div class="chord-block">
+        <span class="chord-line">      Am7          D7      GM7             Em7</span>
+        <span class="lyric-line">Forget about your work today      Tonight's gonna be fun</span>
+        <span class="chord-line">      Am7          D7      Bm7             Em7</span>
+        <span class="lyric-line">Leave all your worries behind       Let's dance together</span>
+      </div>
+    </div>
+
+    <!-- ══ Chorus ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Chorus</p>
+      <div class="chord-block">
+        <span class="chord-line">      Am7          D7            GM7             Em7</span>
+        <span class="lyric-line">Let's clap our hands, let's clap our hands    Everyone keep the rhythm</span>
+        <span class="chord-line">      Am7          D7           Bm7            Em7</span>
+        <span class="lyric-line">This little room becomes special     Our hearts are beating fast</span>
+        <span class="chord-line">      Am7          D7                 GM7</span>
+        <span class="lyric-line">Let's clap our hands, let's clap our hands  Sing with a loud voice</span>
+        <span class="chord-line">Am7                    D7                 D</span>
+        <span class="lyric-line">Blow away all the sadness  With the power of music</span>
+      </div>
+    </div>
+
+    <!-- ══ Verse 2 ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Verse 2</p>
+      <div class="chord-block">
+        <span class="chord-line">        Am7         D7         GM7             Em7</span>
+        <span class="lyric-line">Put your heavy bag aside        Tonight you are free</span>
+        <span class="chord-line">        Am7         D7         Bm7             Em7</span>
+        <span class="lyric-line">Move to the music and            Everything becomes fun</span>
+      </div>
+    </div>
+
+    <div class="chord-section">
+      <p class="chord-section-label">Chorus</p>
+      <div class="chord-block">
+        <span class="lyric-note">（Chorus 繰り返し）</span>
+      </div>
+    </div>
+
+    <!-- ══ Verse 3 ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Verse 3</p>
+      <div class="chord-block">
+        <span class="chord-line">C                           Bm7</span>
+        <span class="lyric-line">Sweat is shining on our faces    Youth is coming back to life</span>
+        <span class="chord-line">Am7                         GM7</span>
+        <span class="lyric-line">Strangers standing next to us    Now we're all family tonight</span>
+        <span class="chord-line">C                       Bm7             Em7    Am7  D7    D</span>
+        <span class="lyric-line">Bodies moving to the beat  Hearts connected through the sound</span>
+      </div>
+    </div>
+
+    <div class="chord-section">
+      <p class="chord-section-label">Chorus</p>
+      <div class="chord-block">
+        <span class="lyric-note">（Chorus 繰り返し）</span>
+      </div>
+    </div>
+
+    <!-- ══ Bridge ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Bridge</p>
+      <div class="chord-block">
+        <span class="lyric-note">（Hand claps only）</span>
+        <span class="chord-line">          Am7         D7   GM7         Em7</span>
+        <span class="lyric-line">Clap clap, clap clap         Clap clap clap</span>
+        <span class="chord-line">          Am7          D7   Bm7         Em7</span>
+        <span class="lyric-line">Clap clap, clap clap         Clap clap clap</span>
+        <span class="chord-line">  Am7       D7           GM7              Em7</span>
+        <span class="lyric-line">Tomorrow might be hard again  But forget everything now</span>
+        <span class="chord-line">Am7   D7       D</span>
+        <span class="lyric-line">Keep on dancing!</span>
+      </div>
+    </div>
+
+    <!-- ══ Final Chorus ══ -->
+    <div class="chord-section">
+      <p class="chord-section-label">Final Chorus</p>
+      <div class="chord-block">
+        <span class="lyric-line">Let's clap our hands, let's clap our hands</span>
+        <span class="lyric-line">Even louder now</span>
+        <span class="lyric-line">From this little room to the world</span>
+        <span class="lyric-line">Let's send our feelings out</span>
+        <span class="lyric-line">Let's clap our hands, let's clap our hands</span>
+        <span class="lyric-line">Keep going till the morning</span>
+        <span class="lyric-line">Remember this happiness</span>
+        <span class="lyric-line">We'll try our best tomorrow</span>
+      </div>
+    </div>
+
+    <!-- ══ Section divider ══ -->
+    <div class="section-divider"></div>
+
+    <!-- ══ Japanese Translation ══ -->
+    <p style="font-family:'Nunito',sans-serif;font-size:0.7rem;letter-spacing:0.4em;color:var(--green-light);text-transform:uppercase;margin-bottom:2rem;">日本語訳</p>
+
+    <div class="translation-section">
+      <p class="translation-label">Verse 1</p>
+      <div class="translation-text">
+        <p>今日は仕事のことは忘れよう</p>
+        <p>今夜は楽しくなるよ</p>
+        <p>心配ごとは全部置いてきて</p>
+        <p>一緒に踊ろう</p>
+      </div>
+    </div>
+
+    <div class="translation-section">
+      <p class="translation-label">Chorus</p>
+      <div class="translation-text">
+        <p>手をたたこう、手をたたこう</p>
+        <p>みんなでリズムを合わせて</p>
+        <p>この小さな部屋が特別な場所に変わる</p>
+        <p>胸がドキドキしてる</p>
+        <p>手をたたこう、手をたたこう</p>
+        <p>大きな声で歌おう</p>
+        <p>悲しいことは全部吹き飛ばそう</p>
+        <p>音楽の力で</p>
+      </div>
+    </div>
+
+    <div class="translation-section">
+      <p class="translation-label">Verse 2</p>
+      <div class="translation-text">
+        <p>重たいカバンはそこに置いて</p>
+        <p>今夜はキミは自由だ</p>
+        <p>音楽に身を任せれば</p>
+        <p>なんでも楽しくなる</p>
+      </div>
+    </div>
+
+    <div class="translation-section">
+      <p class="translation-label">Verse 3</p>
+      <div class="translation-text">
+        <p>顔に汗が光ってる</p>
+        <p>青春がよみがえる</p>
+        <p>隣に立ってた知らない人が</p>
+        <p>今夜はみんな家族</p>
+        <p>体がビートに合わせて動く</p>
+        <p>音でつながる心</p>
+      </div>
+    </div>
+
+    <div class="translation-section">
+      <p class="translation-label">Bridge</p>
+      <div class="translation-text">
+        <p class="t-note">（手拍子だけ）</p>
+        <p>明日はまた大変かもしれない</p>
+        <p>でも今は全部忘れて</p>
+        <p>踊り続けよう！</p>
+      </div>
+    </div>
+
+    <div class="translation-section">
+      <p class="translation-label">Final Chorus</p>
+      <div class="translation-text">
+        <p>手をたたこう、手をたたこう</p>
+        <p>もっと大きく</p>
+        <p>この小さな部屋から世界へ</p>
+        <p>気持ちを届けよう</p>
+        <p>手をたたこう、手をたたこう</p>
+        <p>朝まで続けよう</p>
+        <p>この幸せを覚えていよう</p>
+        <p>明日もがんばろう</p>
+      </div>
+    </div>
+
+    <!-- ══ YouTube ══ -->
+    <div class="yt-section">
+      <p class="yt-section-title">YouTube — Clap Hands</p>
+      <a class="yt-card" href="https://www.youtube.com/watch?v=71-YYKek8N4" target="_blank">
+        <img src="https://img.youtube.com/vi/71-YYKek8N4/hqdefault.jpg" alt="Branch — Clap Hands" loading="lazy">
+        <div class="yt-overlay"><div class="yt-play"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-info"><h4>Clap Hands</h4><p>Branch Original</p></div>
+      </a>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-logo">
+      <img src="images/design/htb-logo.png" alt="Happen to Be" style="height:36px;width:36px;border-radius:50%;object-fit:cover;border:2px solid var(--orange);">
+      Happen to Be
+    </div>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/happen_to_be04" target="_blank">Instagram</a>
+      <a href="https://www.youtube.com/@happentobe07" target="_blank">YouTube</a>
+      <a href="branch.html">Branch</a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <p class="footer-copy">© 2026 Happen to Be. 東近江, Shiga, Japan.</p>
+  </footer>
+
+  <div class="mobile-overlay" id="mobileOverlay">
+    <a href="about.html">About</a>
+    <a href="live.html">Live</a>
+    <a href="music.html">Music</a>
+    <a href="history.html">History</a>
+    <a href="branch.html">Branch</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="contact.html">Contact</a>
+    <a href="bbs.html">BBS</a>
+    <button class="mobile-close" id="mobileClose" aria-label="閉じる">✕</button>
+  </div>
+  <script>
+  (function(){
+    var btn = document.getElementById('hamburger');
+    var overlay = document.getElementById('mobileOverlay');
+    if (!btn || !overlay) return;
+    btn.addEventListener('click', function(){
+      btn.classList.toggle('open');
+      overlay.classList.toggle('open');
+    });
+    overlay.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){
+        btn.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    });
+    var closeBtn = document.getElementById('mobileClose');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function(){
+        btn.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
