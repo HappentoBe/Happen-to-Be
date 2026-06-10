@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Logic Pro プロジェクト（音源制作データはWebリポジトリに含めない）
+*.logicx/
+
+# 歌詞・コード等の元データ（Web公開はHTML側で行う）
+*.docx
